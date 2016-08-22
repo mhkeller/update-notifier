@@ -49,15 +49,54 @@ console.log(notifier.update);
 */
 ```
 
+### GitHub Tag example 
+
+```js
+const updateNotifier = require('update-notifier');
+const pkg = {
+  pkg: require('./package.json'),
+  registry: 'github',
+  githubOwner: 'repo-owner'
+}
+
+// Checks for available update and returns an instance
+const notifier = updateNotifier(pkg);
+
+// Notify using the built-in convenience method
+notifier.notify();
+
+// `notifier.update` contains some useful info about the update
+console.log(notifier.update);
+/*
+{
+  latest: '1.0.1',
+  current: '1.0.0',
+  type: 'patch', // possible values: latest, major, minor, patch, prerelease, build
+  name: 'pageres'
+}
+*/
+```
+
 ### Example with settings and custom message
 
 ```js
 const notifier = updateNotifier({
-	pkg,
-	updateCheckInterval: 1000 * 60 * 60 * 24 * 7 // 1 week
+  pkg,
+  updateCheckInterval: 1000 * 60 * 60 * 24 * 7 // 1 week
 });
 
 console.log(`Update available: ${notifier.update.latest}`);
+```
+
+### Example with custom install string
+
+```js
+const notifier = updateNotifier({
+	pkg: pkg,
+	installString: 'sudo npm install -g <org>/<repo>'
+});
+
+// Prints the normal install box, replacing `npm install <pkg-name>` with your `installString`.
 ```
 
 
