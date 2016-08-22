@@ -59,6 +59,14 @@ const pkg = {
   githubOwner: 'repo-owner'
 }
 
+// For private repos, add the following
+// pkg.githubOptions = {
+//   auth: {
+//     type: 'oauth', // For other types of authentication, see https:// github.com/mikedeboer/node-github#authentication
+//     token: 'XXXXX'
+//   }
+// }
+
 // Checks for available update and returns an instance
 const notifier = updateNotifier(pkg);
 
