@@ -1,7 +1,7 @@
 {
   "name": "update-notifier-plus",
-  "version": "1.0.0",
-  "description": "Update notifications for your CLI app",
+  "version": "1.0.1",
+  "description": "Update notifications for your CLI app. Supports: GitHub (including private repos) or npm; custom install messages.",
   "license": "BSD-2-Clause",
   "repository": "mhkeller/update-notifier-plus",
   "author": {
@@ -10,7 +10,7 @@
     "url": "mhkeller.com"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=0.12.0"
   },
   "scripts": {
     "test": "xo && mocha --timeout 20000"
@@ -21,8 +21,11 @@
   ],
   "keywords": [
     "npm",
+    "github",
+    "github tag",
     "update",
     "updater",
+    "tag",
     "notify",
     "notifier",
     "check",
