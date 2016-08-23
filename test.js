@@ -8,7 +8,7 @@ var FixtureStdout = require('fixture-stdout');
 var stripAnsi = require('strip-ansi');
 var updateNotifier = require('./');
 
-describe('updateNotifier', function () {
+describe('updateNotifier npm', function () {
 	var generateSettings = function (options) {
 		options = options || {};
 		return {
@@ -33,7 +33,46 @@ describe('updateNotifier', function () {
 	});
 
 	it('should check for update', function () {
-		return updateNotifier(generateSettings()).checkNpm().then(function (update) {
+		return updateNotifier(generateSettings()).checkRegistry().then(function (update) {
+			assert.equal(update.current, '0.0.2');
+		});
+	});
+
+	it('should check for update with callback', function (cb) {
+		updateNotifier(generateSettings({
+			callback: cb
+		}));
+	});
+});
+
+describe('updateNotifier github', function () {
+	var generateSettings = function (options) {
+		options = options || {};
+		return {
+			pkg: {
+				name: 'stable-tag',
+				version: '0.0.2'
+			},
+			registry: 'github',
+			githubOwner: 'mhkeller',
+			callback: options.callback || null
+		};
+	};
+
+	var configstorePath;
+
+	beforeEach(function () {
+		configstorePath = updateNotifier(generateSettings()).config.path;
+	});
+
+	afterEach(function () {
+		setTimeout(function () {
+			fs.unlinkSync(configstorePath);
+		}, 10000);
+	});
+
+	it('should check for update', function () {
+		return updateNotifier(generateSettings()).checkRegistry().then(function (update) {
 			assert.equal(update.current, '0.0.2');
 		});
 	});
@@ -113,6 +152,7 @@ describe('notify(opts)', function () {
 	it('should use pretty boxen message by default', function () {
 		function Control() {
 			this.packageName = 'update-notifier-tester';
+			this.installString = 'npm i -g ' + this.packageName;
 			this.update = {
 				current: '0.0.2',
 				latest: '1.0.0'

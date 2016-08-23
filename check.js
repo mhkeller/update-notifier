@@ -6,7 +6,7 @@ var options = JSON.parse(process.argv[2]);
 
 updateNotifier = new updateNotifier.UpdateNotifier(options);
 
-updateNotifier.checkRegistry(options).then(function (update) {
+updateNotifier.checkRegistry().then(function (update) {
 	// only update the last update check time on success
 	updateNotifier.config.set('lastUpdateCheck', Date.now());
 

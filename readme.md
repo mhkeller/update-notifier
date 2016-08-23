@@ -1,5 +1,4 @@
-update-notifier-plus [![Build Status](https://travis-ci.org/mhkeller/update-notifier-plus.svg?branch=master)](https://travis-ci.org/mhkeller/update-notifier-plus)
-===
+# update-notifier-plus [![Build Status](https://travis-ci.org/mhkeller/update-notifier-plus.svg?branch=master)](https://travis-ci.org/mhkeller/update-notifier-plus)
 
 > Update notifications for your CLI app. Supports GitHub (including private repos) or npm as the registry; custom install messages.
 
@@ -7,7 +6,7 @@ update-notifier-plus [![Build Status](https://travis-ci.org/mhkeller/update-noti
 
 Inform users of your package of updates in a non-intrusive way. 
 
-#### How is this different from [update-notifier](https://www.npmjs.com/package/update-notifier)?
+### How is this different from [update-notifier](https://www.npmjs.com/package/update-notifier)?
 
 This fork adds two features:
 
@@ -57,7 +56,7 @@ console.log(notifier.update);
 */
 ```
 
-### GitHub Tag example 
+### GitHub tag example 
 
 ```js
 const updateNotifier = require('update-notifier');
@@ -68,11 +67,9 @@ const pkg = {
 }
 
 // For private repos, add the following
-// pkg.githubOptions = {
-//   auth: {
-//     type: 'oauth', // For other types of authentication, see https:// github.com/mikedeboer/node-github#authentication
-//     token: 'XXXXX'
-//   }
+// pkg.githubAuth = {
+//   type: 'oauth', // For other types of authentication, see https:// github.com/mikedeboer/node-github#authentication
+//   token: 'XXXXX'
 // }
 
 // Checks for available update and returns an instance

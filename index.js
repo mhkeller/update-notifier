@@ -15,18 +15,17 @@ var xdgBasedir = lazyRequire('xdg-basedir');
 var ONE_DAY = 1000 * 60 * 60 * 24;
 
 var registryCheckers = {
-	npm: function (options) {
-		return latestVersion()(options.pkg.name);
+	npm: function () {
+		return latestVersion()(this.packageName);
 	},
-	github: function (options) {
-		return latestGithub()(options.githubOwner, options.pkg.name, options.githubOptions);
+	github: function () {
+		return latestGithub()(this.githubOwner, this.packageName, {auth: this.githubAuth});
 	}
 };
 
 function UpdateNotifier(options) {
 	this.options = options = options || {};
 	options.pkg = options.pkg || {};
-	options.githubOptions = options.githubOptions || {};
 
 	// reduce pkg to the essential keys. with fallback to deprecated options
 	// TODO: remove deprecated options at some point far into the future
@@ -44,11 +43,13 @@ function UpdateNotifier(options) {
 
 	this.registry = options.registry || 'npm';
 	this.packageName = options.pkg.name;
-	this.installString = options.installString || ('npm i -g' + (this.registry === 'npm' ? ' ' : ' ' + options.githubOwner + '/') + this.packageName);
+	this.githubOwner = options.githubOwner;
+	this.installString = options.installString || ('npm i -g' + (this.registry === 'npm' ? ' ' : ' ' + this.githubOwner + '/') + this.packageName);
 	this.packageVersion = options.pkg.version;
 	this.updateCheckInterval = typeof options.updateCheckInterval === 'number' ? options.updateCheckInterval : ONE_DAY;
 	this.hasCallback = typeof options.callback === 'function';
 	this.callback = options.callback || function () {};
+	this.githubAuth = options.githubAuth;
 
 	if (!this.hasCallback) {
 		try {
@@ -76,7 +77,7 @@ function UpdateNotifier(options) {
 
 UpdateNotifier.prototype.check = function () {
 	if (this.hasCallback) {
-		this.checkNpm().then(this.callback.bind(this, null)).catch(this.callback);
+		this.checkRegistry().then(this.callback.bind(this, null)).catch(this.callback);
 		return;
 	}
 	if (
@@ -106,8 +107,8 @@ UpdateNotifier.prototype.check = function () {
 	}).unref();
 };
 
-UpdateNotifier.prototype.checkRegistry = function (options) {
-	return registryCheckers[this.registry](options).then(function (latestVersion) {
+UpdateNotifier.prototype.checkRegistry = function () {
+	return registryCheckers[this.registry].call(this).then(function (latestVersion) {
 		return {
 			latest: latestVersion,
 			current: this.packageVersion,

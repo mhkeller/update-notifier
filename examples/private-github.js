@@ -10,11 +10,9 @@ updateNotifier({
 	},
 	registry: 'github',
 	githubOwner: 'mhkeller',
-	githubOptions: {
-		auth: {
-			type: 'oauth', // For other types of authentication, see https:// github.com/mikedeboer/node-github#authentication
-			token: 'XXXX'
-		}
+	githubAuth: {
+		type: 'oauth', // For other types of authentication, see https:// github.com/mikedeboer/node-github#authentication
+		token: 'XXXX'
 	},
 	updateCheckInterval: 0
 }).notify();
