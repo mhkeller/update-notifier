@@ -1,13 +1,13 @@
 {
-  "name": "update-notifier",
-  "version": "1.0.2",
+  "name": "update-notifier-plus",
+  "version": "1.0.0",
   "description": "Update notifications for your CLI app",
   "license": "BSD-2-Clause",
-  "repository": "yeoman/update-notifier",
+  "repository": "mhkeller/update-notifier-plus",
   "author": {
-    "name": "Sindre Sorhus",
-    "email": "sindresorhus@gmail.com",
-    "url": "sindresorhus.com"
+    "name": "Michael Keller",
+    "email": "code@mhkeller.com",
+    "url": "mhkeller.com"
   },
   "engines": {
     "node": ">=0.10.0"

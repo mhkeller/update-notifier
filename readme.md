@@ -1,10 +1,18 @@
-# update-notifier [![Build Status](https://travis-ci.org/yeoman/update-notifier.svg?branch=master)](https://travis-ci.org/yeoman/update-notifier)
+update-notifier-plus [![Build Status](https://travis-ci.org/mhkeller/update-notifier-plus.svg?branch=master)](https://travis-ci.org/mhkeller/update-notifier-plus)
+===
 
-> Update notifications for your CLI app
+> Update notifications for your CLI app. Supports GitHub (including private repos) or npm as the registry; custom install messages.
 
 ![](screenshot.png)
 
-Inform users of your package of updates in a non-intrusive way.
+Inform users of your package of updates in a non-intrusive way. 
+
+#### How is this different from [update-notifier](https://www.npmjs.com/package/update-notifier)?
+
+This fork adds two features:
+
+1. The ability to use a GitHub repo as your reference point, in which case it will match against the latest tag version. Private repos are also supported as long as you pass authentication (see examples below).
+2. The option to specify a different install command while keeping the nice box design to the notify message. You might use this feature if you want to tell users to prepend `sudo` to their install command or add certain environment variables. 
 
 #### Table of Contents
 

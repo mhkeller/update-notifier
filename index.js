@@ -15,11 +15,11 @@ var xdgBasedir = lazyRequire('xdg-basedir');
 var ONE_DAY = 1000 * 60 * 60 * 24;
 
 var registryCheckers = {
-	npm: function(options) {
-		return latestVersion()(options.pkg.name)
+	npm: function (options) {
+		return latestVersion()(options.pkg.name);
 	},
-	github: function(options) {
-		return latestGithub()(options.githubOwner, options.pkg.name, options.githubOptions)
+	github: function (options) {
+		return latestGithub()(options.githubOwner, options.pkg.name, options.githubOptions);
 	}
 };
 
