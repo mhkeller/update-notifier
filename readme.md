@@ -1,4 +1,4 @@
-# update-notifier-plus [![Build Status](https://travis-ci.org/mhkeller/update-notifier-plus.svg?branch=master)](https://travis-ci.org/mhkeller/update-notifier-plus)
+# update-notifier-plus 
 
 > Update notifications for your CLI app. Supports GitHub (including private repos) or npm as the registry; custom install messages.
 
